@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 
 #ifndef STASSID
-#define STASSID "linksys_SES_35179"
-#define STAPSK  "dddddddddddddddddddddddddd"
+#define STASSID ""
+#define STAPSK  ""
 #endif
 
 #include "LOGIN_page.h" //Our HTML webpage contents
