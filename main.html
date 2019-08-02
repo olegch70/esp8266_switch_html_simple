@@ -94,6 +94,24 @@
     $(function() {
       $('#toggle-event').change(function() {
         $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+          if ( $(this).prop('checked') ) {
+              console.log("checked");
+              $.post(
+                  "/api/v1/state/switch",
+                  {
+                      state: "on"
+                  }
+              );
+
+          } else {
+              console.log("unchecked");
+              $.post(
+                  "/api/v1/state/switch",
+                  {
+                      state: "off"
+                  }
+              );
+          }
       })
     })
     </script>

@@ -2,10 +2,14 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
+#include "WIFI_info.h" //Our HTML webpage contents
+
 #ifndef STASSID
 #define STASSID ""
 #define STAPSK  ""
 #endif
+
+#define  version_info 2
 
 #include "LOGIN_page.h" //Our HTML webpage contents
 #include "MAIN_page.h" //Our HTML webpage contents
@@ -90,6 +94,59 @@ void handleRoot() {
 }
 
 //no need authentication
+void handleStateSwitch() {
+
+    if ( server.method() == HTTP_POST ) {
+        handleSwitchPost();
+    }
+
+  String message = "switch \n\n";
+  message += "URI: ";
+  message += server.uri();
+  message += "\nMethod: ";
+  message += (server.method() == HTTP_GET) ? "GET" : "POST";
+  message += "\nArguments: ";
+  message += server.args();
+  message += "\n";
+  for (uint8_t i = 0; i < server.args(); i++) {
+    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+  }
+
+  Serial.println("handleSwitch " + message);
+
+  server.send(200, "text/plain", message);
+}
+
+/**
+ * Process modification state for switch
+ * */
+void handleSwitchPost() {
+
+    String state = "";
+    String message = "";
+    
+    for (uint8_t i = 0; i < server.args(); i++) {
+        if ( server.argName(i) == "state") {
+            state = server.arg(i);
+        }
+        message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+    }
+
+    if ( state != "" ) {
+        message += "\n state assigned to " + state;
+
+        if ( state == "on" ) {
+            digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
+        } else if ( state == "off" ) {
+            digitalWrite(LED_BUILTIN, HIGH);   // Turn the LED off (Note that LOW is the voltage level
+        }
+    }
+
+  Serial.println("handleSwitchPost " + message);
+    
+}
+
+
 void handleNotFound() {
   String message = "File Not Found\n\n";
   message += "URI: ";
@@ -106,8 +163,11 @@ void handleNotFound() {
 }
 
 void setup(void) {
+
+  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+
   Serial.begin(9600);
-  Serial.println("setup");
+  Serial.println("\nsetup " + version_info);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
@@ -129,6 +189,8 @@ void setup(void) {
   server.on("/inline", []() {
     server.send(200, "text/plain", "this works without need of authentication");
   });
+
+  server.on("/api/v1/state/switch", handleStateSwitch);
 
   server.onNotFound(handleNotFound);
   //here the list of headers to be recorded
