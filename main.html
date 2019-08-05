@@ -84,7 +84,9 @@
         <h1 class="h3 mb-3 font-weight-normal">Кухня. Основное освещение.</h1>
       </row>
       <row>
-        <input id="toggle-event" type="checkbox" data-toggle="toggle">
+        <input id="toggle-event" type="checkbox" data-toggle="toggle" data-size="lg"
+               data-on="Включено" data-off="Выключено"
+        >
       </row>
       <row>
         <div id="console-event"></div>
@@ -93,9 +95,11 @@
     <script>
     $(function() {
       $('#toggle-event').change(function() {
-        $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+
+          //$('#console-event').html('Toggle: ' + $(this).prop('checked'));
+
           if ( $(this).prop('checked') ) {
-              console.log("checked");
+              // console.log("checked");
               $.post(
                   "/api/v1/state/switch",
                   {
@@ -104,7 +108,7 @@
               );
 
           } else {
-              console.log("unchecked");
+              // console.log("unchecked");
               $.post(
                   "/api/v1/state/switch",
                   {

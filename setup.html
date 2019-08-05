@@ -1,0 +1,97 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.0/examples/sign-in/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Signin</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="signin.css" rel="stylesheet"> -->
+</head>
+
+<body class="text-center">
+
+<style media="screen">
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-align: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+
+    .form-group label {
+        float: left;
+    }
+
+    .form-setup {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-setup .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-setup .form-control:focus {
+        z-index: 2;
+    }
+
+</style>
+
+<form class="form-setup" action="/api/v1/setup/wifi">
+    <content>
+        <row>
+            <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h3 class="h3 mb-3 font-weight-normal">Кухня. Управление освещением.</h3>
+            <h4 class="h4 mb-3 font-weight-normal">Настройка.</h4>
+        </row>
+        <row>
+            <div class="form-group">
+            <label for="userName" >WiFi название</label>
+            <input id="userName" type="text" name="WIFI_NAME" class="form-control" placeholder="WiFi название" required="" autofocus="">
+            </div>
+        </row>
+        <row>
+            <div class="form-group">
+            <label for="inputPassword">WiFi password</label>
+            <input type="text" id="inputPassword" name="WIFI_PASSWORD" class="form-control" placeholder="WiFi password" required="">
+            </div>
+        </row>
+        <row>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить</button>
+        </row>
+    </content>
+</form>
+
+
+</body></html>

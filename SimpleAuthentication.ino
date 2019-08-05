@@ -9,7 +9,7 @@
 #define STAPSK  ""
 #endif
 
-#define  version_info 2
+#define  version_info 3
 
 #include "LOGIN_page.h" //Our HTML webpage contents
 #include "MAIN_page.h" //Our HTML webpage contents
@@ -167,7 +167,10 @@ void setup(void) {
   pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
 
   Serial.begin(9600);
-  Serial.println("\nsetup " + version_info);
+  Serial.println();
+  Serial.print("setup. Version ");
+  Serial.println(version_info);
+  WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
